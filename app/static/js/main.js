@@ -9,6 +9,8 @@ $(document).ready(function() {
             url : '/compare',
             success : function(data) {
                 data = JSON.parse(data)
+                $('#result').val(data.result)
+                $('#result').css('height','90%')
                 console.log(data.result);
             }
         })
