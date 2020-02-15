@@ -16,7 +16,7 @@ Once installed, run the following command to install flask : pip install Flask
 # Running the application
 
 1. Clone the repo
-2. Open terminal and change direory to repo/app 
+2. Open terminal and change directory to repo/app 
 3. Run the command: python app.py
 
 The server will start in http://localhost:8970
