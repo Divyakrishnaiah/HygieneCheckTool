@@ -36,14 +36,14 @@
                 </div>
                 <div class="col m-1" style="background-color: #C5CAE9;">
                     <label class="badge badge-info" style="font-size: 3vh; margin-top: 5px">Exclusion Syntax</label>
-                    <textarea onfocus="clearText('exSyx')" onblur="setText('exSyx','Enter Exclusion Syntax Here...')" name="incSyntax" id="exSyx" class="textareacommon" rows="20" cols="60" >
+                    <textarea onfocus="clearText('exSyx')" onblur="setText('exSyx','Enter Exclusion Syntax Here...')" name="exSyntax" id="exSyx" class="textareacommon" rows="20" cols="60" >
                     </textarea>
                 </div>
             </div>
             <div class= "row justify-content-center">
                 <div class="col col-sm-3">
                     <div class="btn-group" role="group">
-                        <button type="button" name="compare" class="btn btn-primary" id="compare">Compare</button>
+                        <button type="button" name="compare" class="btn btn-primary" name="compare" id="compare">Compare</button>
                         <button type="reset" class="btn btn-danger">Reset</button>
                       </div>
                 </div>
@@ -64,6 +64,7 @@
     <script type="text/javascript" src="../static/js/popper.js"></script>
     <script type="text/javascript" src="../static/js/bootstrap.js"></script>
     <script type="text/javascript" src="../static/js/mdb.js"></script>
+    <script type="text/javascript" src="../static/js/main.js"></script>
 
     <script type="text/javascript">    
         var txtarea = document.getElementById("incSyx");
