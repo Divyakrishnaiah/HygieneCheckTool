@@ -71,5 +71,19 @@ def clearNot(syntax):
     lines = [x for x in lines if x != '']
     return lines
 
+@app.route('/missingkeywords')
+def missingkeywords():
+    return render_template('missingkeywords.html')
+
+@app.route('/getmissingkeys', methods=['POST'])
+def sendmissingkeys():
+    dockeys = request.form['dockeys']
+    modelsyx = request.form['modelsyx']
+    res = {"result" : getmissingkeywords(dockeys, modelsyx)}
+    return json.dumps(res)
+
+def getmissingkeywords(dockeys, modelsyx):
+    missing = ['str1','str2']
+    return missing
 if __name__ == "__main__":
     app.run(debug=True,host='0.0.0.0',port=8970)
