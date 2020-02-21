@@ -85,5 +85,21 @@ def sendmissingkeys():
 def getmissingkeywords(dockeys, modelsyx):
     missing = ['str1','str2']
     return missing
+
+@app.route('/asin')
+def asin():
+    return render_template('asin.html')
+
+@app.route('/findasin',methods=['POST'])
+def findMissingAsin():
+    doc = request.form['doc'].splitlines()
+    mod = request.form['mod'].splitlines()
+    words = []
+    for d in doc:
+        if d not in mod:
+            words.append(d)
+    res = {"result" : words}
+    return json.dumps(res)
+
 if __name__ == "__main__":
     app.run(debug=True,host='0.0.0.0',port=8970)

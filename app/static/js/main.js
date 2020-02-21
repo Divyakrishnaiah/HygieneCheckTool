@@ -30,4 +30,19 @@ $(document).ready(function() {
             }
         })
     });
+
+    $("#asinmissing").click(function(event) {
+        $.ajax({
+            data : {
+                doc : $('#docAsin').val(),
+                mod : $('#msAsin').val()
+            },
+            type : 'POST',
+            url : '/findasin',
+            success : function(data) {
+                data = JSON.parse(data);
+                $('#missres').val(data.result)
+            }
+        })
+    });
 });
