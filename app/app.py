@@ -101,5 +101,13 @@ def findMissingAsin():
     res = {"result" : words}
     return json.dumps(res)
 
+@app.route('/spelling')
+def spelling():
+    return render_template('spelling.html')
+
+@app.route('/syntax')
+def syntax():
+    return render_template('syntax.html')
+
 if __name__ == "__main__":
     app.run(debug=True,host='0.0.0.0',port=8970)
