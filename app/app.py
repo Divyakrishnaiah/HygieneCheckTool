@@ -105,9 +105,25 @@ def findMissingAsin():
 def spelling():
     return render_template('spelling.html')
 
+@app.route('/spellcheck',methods = ['POST'])
+def spellcheck():
+    attrs = request.form['attributes']
+    attrSyx = request.form['attrsyx']
+
+    spellings = []
+    res = {"result" : spellings}
+    return json.dumps(res)
+
 @app.route('/syntax')
 def syntax():
     return render_template('syntax.html')
+
+@app.route('/syntaxcheck',methods = ['POST'])
+def syntaxcheck():
+    syntax = request.form['syntax']
+    scorrect = ''
+    res = {'result' : scorrect}
+    return json.dumps(res)
 
 if __name__ == "__main__":
     app.run(debug=True,host='0.0.0.0',port=8970)

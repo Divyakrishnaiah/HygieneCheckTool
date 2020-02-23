@@ -45,4 +45,33 @@ $(document).ready(function() {
             }
         })
     });
+
+    $('#checksp').click(function(event) {
+        $.ajax({
+            data : {
+                syntax : $('#spSyx').val()
+            },
+            type : 'POST',
+            url : '/syntaxcheck',
+            success :function(data) {
+                data = JSON.parse(data);
+                $('#spresult').val(data.result)
+            }
+        })
+    });
+
+    $('#attrscheck').click(function(event) {
+        $.ajax({
+            data : {
+                attributes : $('#attrs').val(),
+                attrsyx : $('#attrSyx').val()
+            },
+            type : 'POST',
+            url : '/spellcheck',
+            success : function(data){
+                data = JSON.parse(data)
+                $('#attrresult').val(data.result)
+            }
+        })
+    });
 });

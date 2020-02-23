@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SPELLING  CHECK</title>
+    <title>Check Spelling</title>
     <link rel="stylesheet" href="../static/css/fontawesome.css">
     <link rel="stylesheet" href="../static/css/robotofont.css">
     <link href="../static/css/bootstrap.css" rel="stylesheet">
@@ -23,21 +23,26 @@
       </nav>
     <!-- Nav Bar Code Ends -->
 
+    <!-- Row Starts -->
     <div class = "container mt-5" >
-        <h4 class="text-center py-2 theading">Check Spelling</h4>
+        <h4 class="text-center py-4 theading">Check Spelling</h4>
         <form>
             <div class = "row">
-                <div class="col bg-warning m-2" style="background-color: #C5CAE9;">
-                    <label class="badge badge-secondary" style="font-size: 3vh; margin-top: 5px">Spelling</label>
-                    <textarea onfocus="clearText('Spe')" onblur="setText('Spe','Enter Syntax Here...')" name="Spelling" id="Spe" class="textareacommon" rows="20" cols="50" >
+                <div class="col m-1" style="background-color: #C5CAE9;">
+                    <label class="badge badge-warning" style="font-size: 3vh; margin-top: 5px">Attributes</label>
+                    <textarea onfocus="clearText('attrs')" onblur="setText('attrs','Enter Attributes Here...')" name="attrs" id="attrs" class="textareacommon" rows="20" cols="60" >
                     </textarea>
                 </div>
-
+                <div class="col m-1" style="background-color: #C5CAE9;">
+                    <label class="badge badge-warning" style="font-size: 3vh; margin-top: 5px">Syntax</label>
+                    <textarea onfocus="clearText('attrSyx')" onblur="setText('attrSyx','Enter Syntax Here...')" name="attrSyx" id="attrSyx" class="textareacommon" rows="20" cols="60" >
+                    </textarea>
+                </div>
             </div>
             <div class= "row justify-content-center">
-                <div class="col col-sm-2">
+                <div class="col col-sm-3">
                     <div class="btn-group" role="group">
-                        <button type="button" name="check" class="btn btn-primary" name="compare" id="check">Check</button>
+                        <button type="button" name="attrscheck" class="btn btn-primary" name="attrscheck" id="attrscheck">Check</button>
                         <button type="reset" class="btn btn-danger">Reset</button>
                       </div>
                 </div>
@@ -46,7 +51,40 @@
         <div class = "row" style="height: 300px">
             <div class="col bg-info m-1">
                 <label class="badge badge-success" style="font-size: 3vh; margin-top: 5px">Result</label>
-                <textarea id="result" name="result" rows="4" class="textareacommon" style="width:100%"></textarea>
+                <textarea id="attrresult" name="attrresult" rows="6" class="textareacommon" style="width:100%"></textarea>
             </div>
         </div>
     </div>
+    <!-- Row Ends -->
+
+    <!-- JS File Imports -->
+    <script type="text/javascript" src="../static/js/jquery.js"></script>
+    <script type="text/javascript" src="../static/js/popper.js"></script>
+    <script type="text/javascript" src="../static/js/bootstrap.js"></script>
+    <script type="text/javascript" src="../static/js/mdb.js"></script>
+    <script type="text/javascript" src="../static/js/main.js"></script>
+
+    <script type="text/javascript">    
+        var txtarea = document.getElementById("attrs");
+        txtarea.selectionEnd = 0;
+        txtarea.innerHTML = "Enter Attributes Here...";
+
+        var txtarea = document.getElementById("attrSyx");
+        txtarea.selectionEnd = 0;
+        txtarea.innerHTML = "Enter Syntax Here...";
+        
+        function clearText(id) {
+            const idstr='textarea#'+id
+            if($(idstr).val() === "Enter Attributes Here..." || $(idstr).val() === "Enter Syntax Here...") {
+                $(idstr).val("");
+            }
+        }
+        function setText(id, message) {
+            const idstr='textarea#'+id
+            if($(idstr).val().length == 0) {
+                $(idstr).val(message);
+            }     
+        }
+    </script>
+</body>
+</html>

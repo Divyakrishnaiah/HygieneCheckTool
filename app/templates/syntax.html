@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SYNTAX  CHECK</title>
+    <title>Check SyntaxK</title>
     <link rel="stylesheet" href="../static/css/fontawesome.css">
     <link rel="stylesheet" href="../static/css/robotofont.css">
     <link href="../static/css/bootstrap.css" rel="stylesheet">
@@ -23,26 +23,20 @@
       </nav>
     <!-- Nav Bar Code Ends -->
 
-    <!-- Row Starts -->
     <div class = "container mt-5" >
-        <h4 class="text-center py-4 theading">Check Syntax</h4>
+        <h4 class="text-center py-2 theading">Check Spaces in Syntax</h4>
         <form>
             <div class = "row">
-                <div class="col m-1" style="background-color: #C5CAE9;">
-                    <label class="badge badge-warning" style="font-size: 3vh; margin-top: 5px">Inclusion Syntax</label>
-                    <textarea onfocus="clearText('incSyx')" onblur="setText('incSyx','Enter Inclusion Syntax Here...')" name="incSyntax" id="incSyx" class="textareacommon" rows="20" cols="60" >
-                    </textarea>
-                </div>
-                <div class="col m-1" style="background-color: #C5CAE9;">
-                    <label class="badge badge-warning" style="font-size: 3vh; margin-top: 5px">Exclusion Syntax</label>
-                    <textarea onfocus="clearText('exSyx')" onblur="setText('exSyx','Enter Exclusion Syntax Here...')" name="exSyntax" id="exSyx" class="textareacommon" rows="20" cols="60" >
+                <div class="col m-1 bg-warning m-2" style="background-color: #C5CAE9;">
+                    <label class="badge badge-secondary" style="font-size: 3vh; margin-top: 5px">Syntax</label><br>
+                    <textarea onfocus="clearText('spSyx')" onblur="setText('spSyx','Enter Syntax Here...')" name="spSyx" id="spSyx" class="textareacommon" rows="15" style="width:100%" >
                     </textarea>
                 </div>
             </div>
             <div class= "row justify-content-center">
-                <div class="col col-sm-3">
+                <div class="col col-sm-2">
                     <div class="btn-group" role="group">
-                        <button type="button" name="compare" class="btn btn-primary" name="compare" id="compare">Compare</button>
+                        <button type="button" name="checksp" class="btn btn-primary" name="checksp" id="checksp">Check</button>
                         <button type="reset" class="btn btn-danger">Reset</button>
                       </div>
                 </div>
@@ -51,8 +45,35 @@
         <div class = "row" style="height: 300px">
             <div class="col bg-info m-1">
                 <label class="badge badge-success" style="font-size: 3vh; margin-top: 5px">Result</label>
-                <textarea id="result" name="result" rows="6" class="textareacommon" style="width:100%"></textarea>
+                <textarea id="spresult" name="spresult" rows="4" class="textareacommon" style="width:100%"></textarea>
             </div>
         </div>
     </div>
-    <!-- Row Ends -->
+
+    <!-- JS File Imports -->
+    <script type="text/javascript" src="../static/js/jquery.js"></script>
+    <script type="text/javascript" src="../static/js/popper.js"></script>
+    <script type="text/javascript" src="../static/js/bootstrap.js"></script>
+    <script type="text/javascript" src="../static/js/mdb.js"></script>
+    <script type="text/javascript" src="../static/js/main.js"></script>
+
+    <script type="text/javascript">    
+        var txtarea = document.getElementById("spSyx");
+        txtarea.selectionEnd = 0;
+        txtarea.innerHTML = "Enter Syntax Here...";
+        
+        function clearText(id) {
+            const idstr='textarea#'+id
+            if($(idstr).val() === "Enter Syntax Here...") {
+                $(idstr).val("");
+            }
+        }
+        function setText(id, message) {
+            const idstr='textarea#'+id
+            if($(idstr).val().length == 0) {
+                $(idstr).val(message);
+            }     
+        }
+    </script>
+</body>
+</html>
