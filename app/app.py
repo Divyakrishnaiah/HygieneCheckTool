@@ -110,7 +110,17 @@ def spellcheck():
     attrs = request.form['attributes']
     attrSyx = request.form['attrsyx']
 
+    attrs = attrs.splitlines()
+    attrSyx = attrSyx.splitlines()
     spellings = []
+    for line in attrSyx:
+        if 'AttributesContain' in line:
+            arr = line[line.index('[')+1:line.index(':')].split('|')
+            for a in arr:
+                if a not in attrs:
+                    tag="<mark>"+a+"</mark>"
+                    spellings.append({tag:line})
+
     res = {"result" : spellings}
     return json.dumps(res)
 

@@ -70,7 +70,13 @@ $(document).ready(function() {
             url : '/spellcheck',
             success : function(data){
                 data = JSON.parse(data)
-                $('#attrresult').val(data.result)
+                //console.log(data.result)
+                dstring = ""
+                for(let i = 0 ; i<data.result.length;i++){
+                    key = Object.keys(data.result[i])[0];
+                    dstring+= key + " : <span style='background-color: yellow'>" + data.result[i][key] + "</span><br /><br />";
+                }
+                $('#attrresult').html(dstring)
             }
         })
     });
