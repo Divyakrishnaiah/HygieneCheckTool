@@ -124,6 +124,31 @@ def spellcheck():
     res = {"result" : spellings}
     return json.dumps(res)
 
+@app.route('/loadattrs',methods = ['GET'])
+def attribLoad():
+    str='''item_name
+bullet_point
+product_description
+age.mfg_minimum
+brand
+product_type
+item_description
+material
+material_composition
+batteries_required
+batteries_included
+manufacturer_minimum_age
+includes_rechargable_battery
+included_components
+fabric_type
+includes_ac_adapter
+power_plug_type
+power_source_type
+website_suppressed
+index_suppressed'''
+
+    return str
+
 @app.route('/syntax')
 def syntax():
     return render_template('syntax.html')

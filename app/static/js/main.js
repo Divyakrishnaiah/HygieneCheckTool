@@ -80,4 +80,15 @@ $(document).ready(function() {
             }
         })
     });
+
+    $(document).ready(function(){
+        $.ajax({
+            type:'GET',
+            url: '/loadattrs',
+            success: function(data){
+                $('#attrs').val(data);
+                $('#attrs').attr("readonly", true)
+            }
+        })
+    });
 });
