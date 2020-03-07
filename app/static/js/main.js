@@ -55,7 +55,7 @@ $(document).ready(function() {
             url : '/syntaxcheck',
             success :function(data) {
                 data = JSON.parse(data);
-                $('#spresult').val(data.result)
+                $('#spresult').html(data.result)
             }
         })
     });
