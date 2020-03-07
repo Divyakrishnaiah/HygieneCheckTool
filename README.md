@@ -5,6 +5,7 @@ This app will perform some operations as described below.
 2. Highlight common keywords
 3. Check spaces in syntax
 4. Highlight Missing ASIN
+5. Check Spelling of Keywords
 
 # Setup the Application
 

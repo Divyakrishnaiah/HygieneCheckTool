@@ -178,15 +178,12 @@ def syntaxcheck():
                 indexList.append(i-1) 
             if syntax[i+1] == ' ':
                 indexList.append(i+1)
-
-        print(indexList)
         scorrect=''''''
         for i in range(len(syntax) -1):
             if i in indexList:
                 scorrect += "<mark style='background-color:yellow'> </mark>"
             else:
                 scorrect += syntax[i]
-        print(scorrect)
     res = {'result' : scorrect}
     return json.dumps(res)
 
