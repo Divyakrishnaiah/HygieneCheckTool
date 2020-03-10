@@ -1,4 +1,4 @@
-import os, json
+import os, json, re
 from flask import *
 
 app = Flask(__name__)
@@ -83,7 +83,27 @@ def sendmissingkeys():
     return json.dumps(res)
 
 def getmissingkeywords(dockeys, modelsyx):
-    missing = ['str1','str2']
+    missing = []
+    dockeys = dockeys.split(',')
+    dockeys = [ i.strip() for i in dockeys ]
+
+    word_list = []
+    for line in modelsyx.splitlines():
+        if 'AttributesContain' in line:
+                ln = line[line.index(':')+1:len(line)-1]
+                temp = re.split(r'[|:]',ln)
+                word_list = [*word_list, *temp]
+
+    word_list = [ s.replace("."," ") for s in word_list ]
+
+    for i in range(len(dockeys)):
+        flag= False
+        for j in range(len(word_list)):
+            if dockeys[i] in word_list[j]:
+                 flag = True
+                 break
+        if flag == False:
+            missing.append(dockeys[i])
     return missing
 
 @app.route('/asin')
