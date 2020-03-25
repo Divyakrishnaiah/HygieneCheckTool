@@ -41,7 +41,8 @@ $(document).ready(function() {
             url : '/findasin',
             success : function(data) {
                 data = JSON.parse(data);
-                $('#missres').val(data.result)
+                const res = data.result.toString().replace(/,/g,'\n');
+                $('#missres').val(res);
             }
         })
     });

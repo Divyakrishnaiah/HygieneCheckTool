@@ -3,6 +3,10 @@ from flask import *
 
 app = Flask(__name__)
 
+@app.route("/login")
+def login():
+    return render_template("login.html")
+
 @app.route("/dashboard")
 def dashboard():
     return render_template("dashboard.html")
@@ -44,10 +48,60 @@ def commonelements(inc,exc):
 
     for i in incwords:
         for j in excwords:
-            if i.casefold() in (j.casefold()).replace(' ','.'):
+            if (i.casefold()).replace('.',' ') in (j.casefold()).replace('.',' ') and (i.casefold()).replace('.',' ') == (j.casefold()).replace('.',' '):
                 commonItems.append(j)
-
-    return commonItems
+            elif i.casefold() in (j.casefold()).replace('.',' ') and i.casefold() == (j.casefold()).replace('.',' '):
+                commonItems.append(j)
+            elif i.casefold() in (j.casefold()).replace('.','') and i.casefold() == (j.casefold()).replace('.',''):
+                commonItems.append(j)
+            elif (i.casefold()).replace('.','') in j.casefold() and (i.casefold()).replace('.','') == j.casefold():
+                commonItems.append(j)
+            elif (i.casefold()).replace('.',' ') in j.casefold() and (i.casefold()).replace('.',' ') == j.casefold():
+                commonItems.append(j)
+            elif (i.casefold()).replace('.','') in (j.casefold()).replace('.','') and (i.casefold()).replace('.','') == (j.casefold()).replace('.',''):
+                commonItems.append(j)
+            elif (i.casefold()).replace('.',' ') in (j.casefold()).replace('.','') and (i.casefold()).replace('.',' ') == (j.casefold()).replace('.',''):
+                commonItems.append(j)
+            elif (i.casefold()).replace('.','') in (j.casefold()).replace('.',' ') and (i.casefold()).replace('.','') == (j.casefold()).replace('.',' '):
+                commonItems.append(j)
+            elif (i.casefold()).replace('.','es') in (j.casefold()).replace('.','es') and (i.casefold()).replace('.','es') == (j.casefold()).replace('.','es'):
+                commonItems.append(j)
+            elif i.casefold() in (j.casefold()).replace('.','es') and i.casefold() == (j.casefold()).replace('.','es'):
+                commonItems.append(j)
+            elif i.casefold() in (j.casefold()).replace('.','s') and i.casefold() == (j.casefold()).replace('.','s'):
+                commonItems.append(j)
+            elif (i.casefold()).replace('.','es') in j.casefold() and (i.casefold()).replace('.','es') == j.casefold():
+                commonItems.append(j)
+            elif (i.casefold()).replace('.','s') in j.casefold() and (i.casefold()).replace('.','s') == j.casefold():
+                commonItems.append(j)
+            elif (i.casefold()).replace('.','s') in (j.casefold()).replace('.','s') and (i.casefold()).replace('.','s') == (j.casefold()).replace('.','s'):
+                commonItems.append(j)
+            elif (i.casefold()).replace('.','.s') in j.casefold() and (i.casefold()).replace('.','.s') == j.casefold():
+                commonItems.append(j)
+            elif (i.casefold()).replace('.','.s') in (j.casefold()).replace('.','.s') and (i.casefold()).replace('.','.s') == (j.casefold()).replace('.','.s'):
+                commonItems.append(j)
+            elif i.casefold() in (j.casefold()).replace('.','.s') and i.casefold() == (j.casefold()).replace('.','.s'):
+                commonItems.append(j)
+            elif (j.casefold()).replace('.',' ') in (i.casefold()).replace('.',' '):
+                commonItems.append(j)
+            elif j.casefold() in (i.casefold()).replace('.',' '):
+                commonItems.append(j)
+            elif j.casefold() in (i.casefold()).replace('.',''):
+                commonItems.append(j)
+            elif (j.casefold()).replace('.','') in i.casefold():
+                commonItems.append(j)
+            elif (j.casefold()).replace('.',' ') in i.casefold():
+                commonItems.append(j)
+            elif (j.casefold()).replace('.','') in (i.casefold()).replace('.',''):
+                commonItems.append(j)
+            elif (j.casefold()).replace('.',' ') in (i.casefold()).replace('.',''):
+                commonItems.append(j)
+            elif (j.casefold()).replace('.','') in (i.casefold()).replace('.',' '):
+                commonItems.append(j)
+            
+            
+    #print(list(set(commonItems)))
+    return list(set(commonItems))
 
 def clearNot(syntax):
     notindex =[]
@@ -95,11 +149,12 @@ def getmissingkeywords(dockeys, modelsyx):
                 word_list = [*word_list, *temp]
 
     word_list = [ s.replace("."," ") for s in word_list ]
+         
 
     for i in range(len(dockeys)):
         flag= False
         for j in range(len(word_list)):
-            if dockeys[i] in word_list[j]:
+            if dockeys[i].casefold() in word_list[j].casefold():
                  flag = True
                  break
         if flag == False:
@@ -116,8 +171,11 @@ def findMissingAsin():
     mod = request.form['mod'].splitlines()
     words = []
     for d in doc:
-        if d not in mod:
+          if d not in mod:
             words.append(d)
+    for m in mod:
+        if m not in doc:
+            words.append(m)
     res = {"result" : words}
     return json.dumps(res)
 
@@ -177,33 +235,37 @@ def syntax():
 def syntaxcheck():
     syntax = request.form['syntax']
     indexList =[]
-    for i in range(len(syntax)-1):
-        if syntax[i] == '[' or syntax[i] == ']':
-            if syntax[i-1]==' ':
-                indexList.append(i-1)
-            if syntax[i+1]==' ':
-                indexList.append(i+1)
-        if syntax[i] == ':':
-            if syntax[i-1] == ' ':
-                indexList.append(i-1) 
-            if syntax[i+1] == ' ':
-                indexList.append(i+1)
-        if syntax[i] == '|':
-            if syntax[i-1] == ' ':
-                indexList.append(i-1) 
-            if syntax[i+1] == ' ':
-                indexList.append(i+1)
-        if syntax[i] == ' ':
-            if syntax[i-1] == ' ':
-                indexList.append(i-1) 
-            if syntax[i+1] == ' ':
-                indexList.append(i+1)
-        scorrect=''''''
-        for i in range(len(syntax) -1):
-            if i in indexList:
-                scorrect += "<mark style='background-color:yellow'> </mark>"
-            else:
-                scorrect += syntax[i]
+    try:
+        for i in range(len(syntax)):
+            if syntax[i] == '[' or syntax[i] == ']':
+                if syntax[i-1]==' ':
+                    indexList.append(i-1)
+                if syntax[i+1]==' ':
+                    indexList.append(i+1)
+            if syntax[i] == ':':
+                if syntax[i-1] == ' ':
+                    indexList.append(i-1) 
+                if syntax[i+1] == ' ':
+                    indexList.append(i+1)
+            if syntax[i] == '|':
+                if syntax[i-1] == ' ':
+                    indexList.append(i-1) 
+                if syntax[i+1] == ' ':
+                    indexList.append(i+1)
+            if syntax[i] == ' ':
+                if syntax[i-1] == ' ':
+                    indexList.append(i-1) 
+                if syntax[i+1] == ' ':
+                    indexList.append(i+1)
+    except:
+        pass
+    print(indexList)
+    scorrect=''''''
+    for i in range(len(syntax)):
+        if i in indexList:
+            scorrect += "<mark style='background-color:yellow'> </mark>"
+        else:
+            scorrect += syntax[i]
     res = {'result' : scorrect}
     return json.dumps(res)
 
